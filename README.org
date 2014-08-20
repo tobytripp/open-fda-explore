@@ -1,0 +1,14 @@
+* Installation
+
+** Install Vagrant from https://docs.vagrantup.com/v2/installation/
+** Install the Vagrant Berkfile plugin:
+    $ vagrant plugin install vagrant-berkshelf
+
+This claims to require ChefDK, downloadable from:
+  http://getchef.com/downloads/chef-dk
+
+** Install the Vagrant Chef omnibus plugin
+    $ vagrant plugin install vagrant-omnibus
+
+** Start the VM
+    $ vagrant up
