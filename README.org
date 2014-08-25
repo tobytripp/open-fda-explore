@@ -12,3 +12,11 @@ This claims to require ChefDK, downloadable from:
 
 ** Start the VM
     $ vagrant up
+
+This can take a few minutes as it needs to download Java from Oracle,
+and the Datomic jars.
+
+
+* TODO Load the FDA Data
+
+* TODO Run Data Queries

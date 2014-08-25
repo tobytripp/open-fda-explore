@@ -87,12 +87,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     chef.json = {
       "datomic" => {
-        "license_key"          => (ENV["DATOMIC_LICENSE_KEY"].nil? ? "" :
-                                     ENV["DATOMIC_LICENSE_KEY"]),
-        "license_email"        => (ENV["DATOMIC_LICENSE_EMAIL"].nil? ? "" :
-                                     ENV["DATOMIC_LICENSE_EMAIL"]),
-        "license_download_key" => (ENV["DATOMIC_LICENSE_DOWNLOAD_KEY"].nil? ? "" :
-                                     ENV["DATOMIC_LICENSE_DOWNLOAD_KEY"])
+        "license_key"          => ENV.fetch("DATOMIC_LICENSE_KEY") { "" },
+        "license_email"        => ENV.fetch("DATOMIC_LICENSE_EMAIL") { "" },
+        "license_download_key" => ENV.fetch("DATOMIC_LICENSE_DOWNLOAD_KEY") { "" }
       }}
   end
 end
