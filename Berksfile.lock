@@ -5,7 +5,10 @@ DEPENDENCIES
     revision: 9f655acd362e9b66ebbd4382c4db5e11a07d6654
     ref: 0.2.0
   java
-  ruby_build
+  leiningen
+    path: chef/cookbooks/leiningen
+  ruby_bundler
+    path: chef/cookbooks/ruby_bundler
 
 GRAPH
   apt (2.3.10)
@@ -31,6 +34,13 @@ GRAPH
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
   java (1.22.0)
+  leiningen (0.1.0)
+  ohai (2.0.1)
+  rbenv (1.7.1)
+    apt (>= 0.0.0)
+    build-essential (>= 0.0.0)
+    git (>= 0.0.0)
+    ohai (>= 1.1)
   riak (2.4.13)
     apt (~> 2.3.8)
     build-essential (~> 2.0.2)
@@ -41,6 +51,9 @@ GRAPH
     yum (~> 3.0)
     yum-epel (~> 0.3)
   ruby_build (0.8.0)
+  ruby_bundler (0.1.0)
+    rbenv (>= 0.0.0)
+    ruby_build (>= 0.0.0)
   runit (1.5.10)
     build-essential (>= 0.0.0)
     yum (~> 3.0)
