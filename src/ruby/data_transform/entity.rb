@@ -1,15 +1,13 @@
 require "edn"
 require "forwardable"
 
-module DataTranslate
+module DataTransform
   class Entity
-    extend Forwardable
+    @@id = 0
     attr_reader :data
     attr_accessor :name
 
-    def_delegators :data, :to_edn
-
-    TYPES = %w[drug patient]
+    TYPES = %w[drug patient safetyreport]
     CODES = {
       reporttype: {
         1 => "Spontaneous",
@@ -62,12 +60,14 @@ module DataTranslate
       CODES.keys.map( &:to_s ).concat( %w[
         patientonsetage reactionmeddrapt drugdosageform
         medicinalproduct drugindication
+        safetyreportid
       ]).include? element
     end
 
     def initialize( name )
       @name = name
       @data = {}
+      @id   = @@id += 1
     end
 
     def []=( key, value)
@@ -75,6 +75,12 @@ module DataTranslate
 
       return value unless attribute? key
       data[ to_key( key ) ] = decode( key, value )
+    end
+
+    def to_edn()
+      #id = EDN.tagout "db/id", ["db.part/user".to_sym, @id]
+      id = "#db/id[:db.part/user #{@id}]"
+      data.merge( "db/id".to_sym => id ).to_edn
     end
 
     private

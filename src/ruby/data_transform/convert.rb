@@ -3,7 +3,7 @@ require "nokogiri"
 
 require_relative "entity"
 
-module DataTranslate
+module DataTransform
   class FaersDocument < Nokogiri::XML::SAX::Document
     attr_reader :element_stack, :entity_stack
 
@@ -13,6 +13,16 @@ module DataTranslate
     reactionmeddrapt drugdosageform
     ]
     ELEMENTS = %w[safetyreport drug patient reaction].concat PRINT_ELEMENTS
+
+    def self.load_file( path=nil )
+      file   = File.open( path || "resources/FAERS_2013Q4/xml/ADR13Q4.xml", "r" )
+      parser = Nokogiri::XML::SAX::Parser.new self.new
+      puts "["
+      parser.parse file
+    ensure
+      puts "]"
+      file.close
+    end
 
     def initialize()
       @element_stack = []
@@ -68,14 +78,6 @@ module DataTranslate
 
 end
 
-def main( *args )
-  file = File.open( args.first || "resources/FAERS_2013Q4/xml/ADR13Q4.xml", "r" )
-  parser = Nokogiri::XML::SAX::Parser.new DataTranslate::FaersDocument.new
-  parser.parse file
-ensure
-  file.close
-end
-
-if $0 == $PROGRAM_NAME
-  main( *ARGV )
+if __FILE__ == $PROGRAM_NAME
+  DataTransform::FaersDocument.load_file ARGV.first
 end

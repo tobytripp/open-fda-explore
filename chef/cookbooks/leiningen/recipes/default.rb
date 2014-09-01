@@ -1,11 +1,3 @@
-#
-# Cookbook Name:: leiningen
-# Recipe:: default
-#
-# Copyright (C) 2014 YOUR_NAME
-#
-# All rights reserved - Do Not Redistribute
-#
 remote_file "/usr/local/bin/lein" do
   source "https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein"
   mode 0755
