@@ -1,0 +1,118 @@
+[
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :patient/age
+  :db/valueType   :db.type/float
+  :db/cardinality :db.cardinality/one
+  :db/doc "Patient's age (units vary)"
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :patient/age.unit
+  :db/valueType   :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :patient/gender
+  :db/valueType   :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :patient/reactionmeddrapt
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :patient/reactionoutcome
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :patient/safetyreport
+  :db/valueType   :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db/doc "The safety report that contained this patient"
+  :db.install/_attribute :db.part/db}
+
+
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :reaction/reactionmeddrapt
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc "Drug reaction description"
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :reaction/reactionoutcome
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :reaction/patient
+  :db/valueType   :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db/doc "The patient that reported this reaction."
+  :db.install/_attribute :db.part/db}
+
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :drug/product
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc
+   "Valid Trade Name if populated;
+    otherwise, verbatim name used by reporter.comment"
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :drug/drugcharacterization
+  :db/valueType   :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :drug/drugdosageform
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :drug/drugindication
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc "The indicated condition trated by this drug (?)"
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :drug/actiondrug
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc "Step taken after interaction"
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :drug/patient
+  :db/valueType   :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db/doc "The patient that took this drug"
+  :db.install/_attribute :db.part/db}
+
+
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :safetyreport/safetyreportid
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :safetyreport/reporttype
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+
+ [:db/add #db/id[:db.part/user] :db/ident :patient.gender/unknown]
+ [:db/add #db/id[:db.part/user] :db/ident :patient.gender/male]
+ [:db/add #db/id[:db.part/user] :db/ident :patient.gender/female]
+ [:db/add #db/id[:db.part/user] :db/ident :patient.gender/unspecified]
+
+ [:db/add #db/id[:db.part/user] :db/ident :patient.age.unit/year]
+ [:db/add #db/id[:db.part/user] :db/ident :patient.age.unit/month]
+ [:db/add #db/id[:db.part/user] :db/ident :patient.age.unit/week]
+ [:db/add #db/id[:db.part/user] :db/ident :patient.age.unit/day]
+ [:db/add #db/id[:db.part/user] :db/ident :patient.age.unit/hour]
+
+ [:db/add #db/id[:db.part/user] :db/ident :drug.characterization/suspect]
+ [:db/add #db/id[:db.part/user] :db/ident :drug.characterization/concomitant]
+ [:db/add #db/id[:db.part/user] :db/ident :drug.characterization/interacting]
+
+]
