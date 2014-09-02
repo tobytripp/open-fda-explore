@@ -32,10 +32,10 @@ module DataTransform
 
     def start_element( name, attrs=[] )
       $DEBUG && puts( "---- start #{name} #{element_stack}" )
-      element_stack.push name
       if Entity.type? name.downcase
-        entity_stack.push Entity.new( name )
+        entity_stack.push Entity.new( name, entity )
       end
+      element_stack.push name
     end
 
     def end_element( name )

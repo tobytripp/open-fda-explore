@@ -4,10 +4,10 @@ require "forwardable"
 module DataTransform
   class Entity
     @@id = 0
-    attr_reader :data
+    attr_reader :data, :parent
     attr_accessor :name
 
-    TYPES = %w[drug patient safetyreport]
+    TYPES = %w[drug patient safetyreport reaction]
     CODES = {
       reporttype: {
         1 => "Spontaneous",
@@ -64,10 +64,11 @@ module DataTransform
       ]).include? element
     end
 
-    def initialize( name )
+    def initialize( name, parent=nil )
       @name = name
       @data = {}
       @id   = @@id += 1
+      @parent = parent
     end
 
     def []=( key, value)
@@ -78,9 +79,15 @@ module DataTransform
     end
 
     def to_edn()
-      #id = EDN.tagout "db/id", ["db.part/user".to_sym, @id]
-      id = "#db/id[:db.part/user #{@id}]"
-      data.merge( "db/id".to_sym => id ).to_edn
+      edn = data.to_edn[0..-2]
+      if parent
+        edn += [",", ":#{to_key( parent.name )}", parent.id_tag].join( " " )
+      end
+      edn + ", :db/id #{id_tag}}"
+    end
+
+    def id_tag()
+      "#db/id[:db.part/user #{@id}]"
     end
 
     private
@@ -98,10 +105,10 @@ module DataTransform
 
     def to_key( element_name )
       {
-        "patientonsetage" => "patient/age".to_sym,
+        "patientonsetage"     => "patient/age".to_sym,
         "patientonsetageunit" => "patient/age.unit".to_sym,
-        "patientsex" => "patient/gender".to_sym,
-        "medicinalproduct" => "drug/product".to_sym
+        "patientsex"          => "patient/gender".to_sym,
+        "medicinalproduct"    => "drug/product".to_sym
       }.fetch( element_name ) { "#{name}/#{element_name}".to_sym }
     end
   end
