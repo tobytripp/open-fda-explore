@@ -105,6 +105,7 @@
  [:db/add #db/id[:db.part/user] :db/ident :patient.gender/female]
  [:db/add #db/id[:db.part/user] :db/ident :patient.gender/unspecified]
 
+ [:db/add #db/id[:db.part/user] :db/ident :patient.age.unit/decade]
  [:db/add #db/id[:db.part/user] :db/ident :patient.age.unit/year]
  [:db/add #db/id[:db.part/user] :db/ident :patient.age.unit/month]
  [:db/add #db/id[:db.part/user] :db/ident :patient.age.unit/week]

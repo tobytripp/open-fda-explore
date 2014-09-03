@@ -35,6 +35,7 @@ module DataTransform
         3 => "drug.characterization/interacting".to_sym,
       },
       patientonsetageunit: {
+        800 => "patient.age.unit/decade".to_sym,
         801 => "patient.age.unit/year".to_sym,
         802 => "patient.age.unit/month".to_sym,
         803 => "patient.age.unit/week".to_sym,
@@ -99,7 +100,7 @@ module DataTransform
       if decoder.respond_to? :call
         decoder.call value
       else
-        decoder[value.to_i]
+        decoder.fetch value.to_i
       end
     end
 

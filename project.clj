@@ -7,5 +7,6 @@
                  [com.datomic/datomic-free "0.9.4880.2"]]
   :main open-fda-explore.core
   :source-paths ["src/clj"]
+  :jvm-opts ["-Xmx1g"]
   :user {:plugins [[cider/cider-nrepl "0.7.0"]]}
   )

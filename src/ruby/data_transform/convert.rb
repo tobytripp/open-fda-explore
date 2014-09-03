@@ -47,7 +47,7 @@ module DataTransform
 
       @count += 1
       $DEBUG && puts( "---- end #{name} (#{element_stack.size})" )
-      exit 1 if @count > 500
+      exit 0 if @count > 500 and $DEBUG
     end
 
     def characters( string )
