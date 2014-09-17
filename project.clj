@@ -7,6 +7,12 @@
                  [com.datomic/datomic-free "0.9.4880.2"]]
   :main open-fda-explore.core
   :source-paths ["src/clj"]
-  :jvm-opts ["-Xmx1g"]
-  :user {:plugins [[cider/cider-nrepl "0.7.0"]]}
+  :jvm-opts     ["-Xmx1g"]
+  :user {:plugins [[cider/cider-nrepl "0.8.0-SNAPSHOT"]]}
+
+  :repl-options {
+                 :init-ns open-fda-explore.core
+                 :host    "0.0.0.0"
+                 :port    4343
+                 }
   )

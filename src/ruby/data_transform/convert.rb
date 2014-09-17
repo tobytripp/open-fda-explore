@@ -5,7 +5,7 @@ require_relative "entity"
 
 module DataTransform
   class FaersDocument < Nokogiri::XML::SAX::Document
-    attr_reader :element_stack, :entity_stack
+    attr_reader :element_stack, :entity_stack, :parsed
 
     PRINT_ELEMENTS = %w[
     drugindication medicinalproduct safetyreportid
@@ -16,9 +16,10 @@ module DataTransform
 
     def self.load_file( path=nil )
       file   = File.open( path || "resources/FAERS_2013Q4/xml/ADR13Q4.xml", "r" )
-      parser = Nokogiri::XML::SAX::Parser.new self.new
+      parser = Nokogiri::XML::SAX::Parser.new document = self.new
       puts "["
       parser.parse file
+      puts document.parsed.sort.map( &:to_edn )
     ensure
       puts "]"
       file.close
@@ -27,6 +28,7 @@ module DataTransform
     def initialize()
       @element_stack = []
       @entity_stack  = []
+      @parsed = []
       @count = 0
     end
 
@@ -41,7 +43,7 @@ module DataTransform
     def end_element( name )
       element_stack.pop if element_stack.last == name
       if entity && entity.name == name
-        puts entity.to_edn
+        parsed << entity
         entity_stack.pop
       end
 

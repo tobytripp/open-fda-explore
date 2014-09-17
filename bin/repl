@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+vagrant ssh -c "cd /vagrant && rake repl"

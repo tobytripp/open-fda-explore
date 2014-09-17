@@ -11,6 +11,6 @@ default_attributes(
 
     "host"     => "33.33.33.10.xip.io",
     "port"     => 4334,
-    "protocol" => "dev",
+    "protocol" => "mem",
   }
 )

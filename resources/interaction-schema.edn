@@ -1,4 +1,5 @@
 [
+ ;; Patient
  {:db/id          #db/id[:db.part/db]
   :db/ident       :patient/age
   :db/valueType   :db.type/float
@@ -17,6 +18,7 @@
   :db.install/_attribute :db.part/db}
  {:db/id          #db/id[:db.part/db]
   :db/ident       :patient/reactionmeddrapt
+  :db/doc "MedDRA Preferred Term (text string) is used to characterize the event(s).  Multiple reactions may be reported by using an additional block "
   :db/valueType   :db.type/string
   :db/cardinality :db.cardinality/one
   :db.install/_attribute :db.part/db}
@@ -32,7 +34,7 @@
   :db/doc "The safety report that contained this patient"
   :db.install/_attribute :db.part/db}
 
-
+ ;; Reaction
  {:db/id          #db/id[:db.part/db]
   :db/ident       :reaction/reactionmeddrapt
   :db/valueType   :db.type/string
@@ -51,6 +53,7 @@
   :db/doc "The patient that reported this reaction."
   :db.install/_attribute :db.part/db}
 
+ ;; Drug
  {:db/id          #db/id[:db.part/db]
   :db/ident       :drug/product
   :db/valueType   :db.type/string
@@ -88,7 +91,7 @@
   :db/doc "The patient that took this drug"
   :db.install/_attribute :db.part/db}
 
-
+ ;; Safety Report
  {:db/id          #db/id[:db.part/db]
   :db/ident       :safetyreport/safetyreportid
   :db/valueType   :db.type/string

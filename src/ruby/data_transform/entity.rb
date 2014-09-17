@@ -3,11 +3,11 @@ require "forwardable"
 
 module DataTransform
   class Entity
-    @@id = 0
+    @@id = 1_000_000
     attr_reader :data, :parent
     attr_accessor :name
 
-    TYPES = %w[drug patient safetyreport reaction]
+    TYPES = %w[safetyreport patient drug reaction]
     CODES = {
       reporttype: {
         1 => "Spontaneous",
@@ -88,10 +88,26 @@ module DataTransform
     end
 
     def id_tag()
-      "#db/id[:db.part/user #{@id}]"
+      if ref_target?
+        "#db/id[:db.part/user -#{@id}]"
+      else
+        "#db/id[:db.part/user]"
+      end
+    end
+
+    def sort_index()
+      TYPES.index name
+    end
+
+    def <=>( other )
+      sort_index <=> other.sort_index
     end
 
     private
+
+    def ref_target?()
+      %[safetyreport patient].include? name
+    end
 
     def decode( key, value )
       return value unless CODES.has_key? key.to_sym

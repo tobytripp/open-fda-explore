@@ -1,3 +1,4 @@
+# -*- mode: ruby -*-
 SOURCE_FILE = "resources/FAERS_2013Q4/xml/ADR13Q4.xml"
 $LOAD_PATH.unshift "src/ruby"
 
