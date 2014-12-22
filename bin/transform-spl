@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+# -*- mode: ruby -*-
+
+require "csv"
+require "edn"
+
+# Downloaded from:  http://www.fda.gov/Drugs/DevelopmentApprovalProcess/HowDrugsareDevelopedandApproved/ApprovalApplications/NewDrugApplicationNDA/
+
+def header_convert( hash )
+  Hash[*hash.flat_map { |k,v| [("spl/" + k).downcase.gsub( /\s+/, "-" ).to_sym, v] }]
+end
+
+path = ARGV.first
+puts "["
+CSV.foreach( path, headers: true ) do |row|
+  h = header_convert( row.to_hash ).reject { |k,v| v.nil? }
+  # hackety-hack
+  puts h.to_edn[0..-2] + ", :db/id #db/id[:db.part/user]}"
+end
+puts "]"
+
+# The FAERS drugauthorization field is supposed to be an NDA number,
+# which appears in the "Application Number" field in the NDA/SPL data.

@@ -18,7 +18,9 @@
   :db.install/_attribute :db.part/db}
  {:db/id          #db/id[:db.part/db]
   :db/ident       :patient/reactionmeddrapt
-  :db/doc "MedDRA Preferred Term (text string) is used to characterize the event(s).  Multiple reactions may be reported by using an additional block "
+  :db/doc "MedDRA Preferred Term (text string) is used to characterize
+  the event(s).  Multiple reactions may be reported by using an
+  additional block "
   :db/valueType   :db.type/string
   :db/cardinality :db.cardinality/one
   :db.install/_attribute :db.part/db}
@@ -119,4 +121,55 @@
  [:db/add #db/id[:db.part/user] :db/ident :drug.characterization/concomitant]
  [:db/add #db/id[:db.part/user] :db/ident :drug.characterization/interacting]
 
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :spl/item-code
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :spl/ndc11
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :spl/proprietary-name
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :spl/dosage-form
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :spl/marketing-category
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :spl/application-number-or-citation
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc "NDA, ANDA, or NDC number.  NDAs appear in the FAERS data"
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :spl/product-type
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :spl/marketing-start-date
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :spl/marketing-end-date
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
+ {:db/id          #db/id[:db.part/db]
+  :db/ident       :spl/billing-unit
+  :db/valueType   :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db.install/_attribute :db.part/db}
 ]

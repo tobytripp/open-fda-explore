@@ -1,11 +1,12 @@
 (ns open-fda-explore.core
-  (:use [datomic.api :only [q db] :as d])
-  (:use [clojure pprint])
-  (:require [clojure.java.io :as io])
+  (:require [clojure.java.io :as io]
+            [clojure.pprint  :refer :all]
+            [datomic.api     :only [q db] :as d]
+            [environ.core    :refer [env]])
   (:gen-class :main true))
 
-(def uri "datomic:mem://open-fda")
-(def schema-path "resources/interaction-schema.edn")
+(def uri (env :db-uri))
+(def schema-path (env :schema-path))
 
 (defn datomic-connection
   "Create a database at uri and return a connection"
@@ -19,7 +20,8 @@
     (println "Load schema…")
     @(d/transact conn (read-string (slurp schema-path)))
     (println "success!")
-    (println "Load data…")
+
+    (println "Load data…" path)
 
     ;; (doseq [d data]
     ;;   (pprint d)
@@ -41,8 +43,7 @@
                     [?p :patient/gender :patient.gender/female]
                     [?reaction :reaction/patient ?p]
                     [?drug     :drug/patient ?p]]
-                  db)))
-  )
+                  db))))
 
 (defn drugs-with-reaction [db reaction-name]
   (distinct
@@ -55,9 +56,24 @@
                [?drug     :drug/patient ?p]]
              db reaction-name))))
 
+(defn drugs-sharing-reactions-with [db drug]
+  (map #(d/entity db (first %))
+       (d/q '[:find ?reaction-name
+              :in $ ?drug-name
+              :where
+              [?reaction :reaction/reactionmeddrapt ?reaction-name]
+              [?reaction :reaction/patient ?p]
+              [?drug     :drug/patient ?p]
+              [?drug     :drug/product ?drug-name]
+              ]
+            db drug)))
+
+
 (defn -main
   "Application entry point"
   [& args]
   (if-let [path (first args)]
     (load-data path)
-    (println "No data path given")))
+    (do
+      (load-data (env :faers-path))
+      (load-data (env :spl-path)))))

@@ -8,7 +8,7 @@ module DataTransform
     attr_reader :element_stack, :entity_stack, :parsed
 
     PRINT_ELEMENTS = %w[
-    drugindication medicinalproduct safetyreportid
+    drugindication drugauthorizationnumb medicinalproduct safetyreportid
     occurcountry companynumb patientonsetage
     reactionmeddrapt drugdosageform
     ]
