@@ -9,7 +9,7 @@
   :main open-fda-explore.core
   :plugins [[lein-environ "1.0.0"]]
   :source-paths ["src/clj"]
-  :jvm-opts     ["-Xmx1.75g"]
+  :jvm-opts     ["-Xmx1750m"]
   :user {:plugins [[cider/cider-nrepl "0.8.1"]]}
 
   :repl-options {:init-ns open-fda-explore.core

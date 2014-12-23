@@ -14,3 +14,4 @@
 .lein*
 /resources/*
 /.nrepl-port
+/cookbooks/*
